@@ -1,0 +1,11 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.6.0",
+    "libraryName": "sp-tiles",
+    "libraryId": "480e3fb6-a714-4ecd-8ea6-b0ad2c0a5fd0",
+    "environment": "spo",
+    "packageManager": "npm",
+    "framework": "react",
+    "isCreatingSolution": true
+  }
+}

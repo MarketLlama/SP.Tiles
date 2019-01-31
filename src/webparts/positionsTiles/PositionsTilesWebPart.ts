@@ -98,9 +98,9 @@ export default class PositionsTilesWebPart extends BaseClientSideWebPart<ITilesW
                       required: true
                     },
                     {
-                      id: "icon",
-                      title: strings.iconField,
-                      type: this.customCollectionFieldType.fabricIcon,
+                      id: "picture",
+                      title: strings.pictureField,
+                      type: this.customCollectionFieldType.url,
                       required: true
                     },
                     {

@@ -14,6 +14,7 @@ declare interface IPositionsTilesWebPartStrings {
   descriptionField: string;
   urlField: string;
   iconField: string;
+  pictureField: string;
   targetField: string;
 
   targetCurrent: string;

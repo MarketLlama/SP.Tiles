@@ -8,11 +8,10 @@
   flex-basis: 130px;
 
   a {
-    background-color: $ms-color-themePrimary;
     box-sizing: border-box;
     color: $ms-color-white;
     display: block;
-    min-height: 123px;
+    min-height: 220px;
     overflow: hidden;
     padding: 15px;
     position: relative;
@@ -38,7 +37,12 @@
     position: absolute;
     right: 0;
     text-align: center;
+    font-weight: 500;
+    color: white;
+    background-color: rgba(0, 0%, 0%, 0.67);
+    transition: all .1s ease-out;
   }
+
 
   .overflow {
     background-color: rgba(0, 0, 0, 0.8);
@@ -54,8 +58,19 @@
   }
 
   &:hover {
+    .tileTitle {
+      visibility: hidden;
+    }
     .overflow {
       top: 0;
     }
+
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  .tile{
+    width: 100%;
   }
 }

@@ -3,6 +3,7 @@ export interface ITileInfo {
   description: string;
   url: string;
   icon: string;
+  picture : string;
   target: LinkTarget;
 }
 

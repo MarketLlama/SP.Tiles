@@ -11,6 +11,7 @@ export class Tile extends React.Component<ITileProps, {}> {
       tileStyle.height = `${this.props.height}px`;
     }
     innerTileStyle.backgroundImage = `url("${this.props.item.picture}?RenditionID=6")`;
+
     return (
       <div className={styles.tile} style={tileStyle} >
         <a href={this.props.item.url}

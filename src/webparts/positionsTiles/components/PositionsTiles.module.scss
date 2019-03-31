@@ -1,5 +1,15 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+:global {
+  .CanvasZone,
+  .CanvasSection,
+  .Controlzone,
+  .ControlZoneEmphasisBackground {
+    background-color: inherit;
+    color: inherit;
+  }
+}
+
 .tiles {
   .message {
     @include ms-font-m;

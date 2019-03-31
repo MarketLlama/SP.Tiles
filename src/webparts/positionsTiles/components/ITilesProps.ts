@@ -4,7 +4,7 @@ import { DisplayMode } from '@microsoft/sp-core-library';
 
 export interface ITilesProps extends ITilesWebPartProps {
   displayMode: DisplayMode;
-
+  defaultColor : string;
   fUpdateProperty: (value: string) => void;
   fPropertyPaneOpen: () => void;
 }

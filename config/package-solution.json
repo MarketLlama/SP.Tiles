@@ -3,7 +3,8 @@
   "solution": {
     "name": "sp-tiles-client-side-solution",
     "id": "480e3fb6-a714-4ecd-8ea6-b0ad2c0a5fd0",
-    "version": "1.0.0.1",
+    "version": "1.0.0.5",
+    "skipFeatureDeployment": true,
     "includeClientSideAssets": true
   },
   "paths": {

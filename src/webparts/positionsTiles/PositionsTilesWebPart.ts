@@ -2,12 +2,16 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import * as strings from 'PositionsTilesWebPartStrings';
 import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration, PropertyPaneDropdown } from '@microsoft/sp-webpart-base';
 import { Tiles, ITilesProps, ITileInfo, LinkTarget } from './components';
 
 export interface ITilesWebPartProps {
   collectionData: ITileInfo[];
   tileHeight: number;
+  tilesPerRow : number;
+  tileType : string;
+  defaultColor : string;
+  textColor : string;
   title: string;
 }
 
@@ -20,6 +24,8 @@ export default class PositionsTilesWebPart extends BaseClientSideWebPart<ITilesW
   private propertyFieldNumber;
   private propertyFieldCollectionData;
   private customCollectionFieldType;
+  private propertyFieldColor;
+  private propertyFieldColorStyle;
 
   public render(): void {
     const element: React.ReactElement<ITilesProps> = React.createElement(
@@ -27,6 +33,10 @@ export default class PositionsTilesWebPart extends BaseClientSideWebPart<ITilesW
       {
         title: this.properties.title,
         tileHeight: this.properties.tileHeight,
+        tileType : this.properties.tileType,
+        tilesPerRow : this.properties.tilesPerRow,
+        defaultColor : this.properties.defaultColor,
+        textColor : this.properties.textColor,
         collectionData: this.properties.collectionData,
         displayMode: this.displayMode,
         fUpdateProperty: (value: string) => {
@@ -56,9 +66,16 @@ export default class PositionsTilesWebPart extends BaseClientSideWebPart<ITilesW
       '@pnp/spfx-property-controls/lib/PropertyFieldCollectionData'
     );
 
+    const { PropertyFieldColorPicker, PropertyFieldColorPickerStyle } = await import (
+      /* webpackChunkName: 'pnp-propcontrols-number' */
+      '@pnp/spfx-property-controls/lib/PropertyFieldColorPicker'
+    );
+
     this.propertyFieldNumber = PropertyFieldNumber;
     this.propertyFieldCollectionData = PropertyFieldCollectionData;
     this.customCollectionFieldType = CustomCollectionFieldType;
+    this.propertyFieldColor = PropertyFieldColorPicker;
+    this.propertyFieldColorStyle = PropertyFieldColorPickerStyle;
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -75,7 +92,6 @@ export default class PositionsTilesWebPart extends BaseClientSideWebPart<ITilesW
                   key: "collectionData",
                   label: strings.tilesDataLabel,
                   panelHeader: strings.tilesPanelHeader,
-                  panelDescription: `${strings.iconInformation} https://developer.microsoft.com/en-us/fabric#/styles/icons`,
                   manageBtnLabel: strings.tilesManageBtn,
                   value: this.properties.collectionData,
                   fields: [
@@ -120,11 +136,51 @@ export default class PositionsTilesWebPart extends BaseClientSideWebPart<ITilesW
                     }
                   ]
                 }),
+                this.propertyFieldColor(
+                  'defaultColor', {
+                    label: 'Default Color',
+                    selectedColor: this.properties.defaultColor,
+                    properties: this.properties,
+                    disabled: false,
+                    isHidden: false,
+                    alphaSliderHidden: false,
+                    style: this.propertyFieldColorStyle.Full,
+                    iconName: 'Precipitation',
+                    key: 'colorFieldId',
+                    onPropertyChange: this.onPropertyPaneFieldChanged
+                }),
                 this.propertyFieldNumber('tileHeight', {
                   key: "tileHeight",
                   label: strings.TileHeight,
                   value: this.properties.tileHeight
-                })
+                }),
+                PropertyPaneDropdown('tileType',{
+                  label : 'Tile Type',
+                  options:[{
+                    key: "flip",
+                    text: "Flip Tile"
+                  },
+                  {
+                    key: "slide",
+                    text: "Slide Tile"
+                  }]
+                }),
+                PropertyPaneDropdown('textColor',{
+                  label : 'Text Color',
+                  selectedKey : '#FFF',
+                  options:[{
+                    key: "#FFF",
+                    text: "White"
+                  },
+                  {
+                    key: "#000",
+                    text: "Black"
+                  },
+                  {
+                    key: '#3F3F3F',
+                    text : 'Grey'
+                  }]
+                }),
               ]
             }
           ]
